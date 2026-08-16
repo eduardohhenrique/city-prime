@@ -1,6 +1,8 @@
 function App() {
   return (
-    <h1>City Prime</h1>
+    <main className="app">
+      <h1>City Prime</h1>
+    </main>
   )
 }
 
