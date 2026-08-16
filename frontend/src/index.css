@@ -10,3 +10,31 @@ boody {
   min-height: 100vh;
   background-color: #f8f7f4 ;
 }
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 24px 48px;
+}
+
+.navbar-logo {
+  margin: 0;
+
+  font-size: 24px;
+  font-weight: 700;
+
+  color: #f97316;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 28px;
+}
+
+.navbar-links a {
+  color: #444;
+  text-decoration: none;
+  font-size: 15px;
+}
