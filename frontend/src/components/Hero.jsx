@@ -1,9 +1,11 @@
+import SearchBar from "./SearchBar"
+
 function Hero() {
   return (
     <section
-    id="inicio"
-    className="hero"
-    aria-labelledby="hero-tittle"
+      id="inicio"
+      className="hero"
+      aria-labelledby="hero-tittle"
     >
       <div className="hero-content">
         <p className="hero-label">
@@ -23,6 +25,8 @@ function Hero() {
         <p className="hero-description">
           Conte o que está pensando e encontre lugares que combinam com o seu momento.
         </p>
+
+        <SearchBar />
       </div>
     </section>
   )
