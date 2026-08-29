@@ -361,6 +361,30 @@ select {
   text-align: center;
 }
 
+.search-status {
+  width: 100%;
+}
+
+.search-result {
+  margin: 18px 8px 0;
+  padding: 14px 16px;
+
+  color: var(--color-text-secondary);
+  background-color: rgba(79, 70, 229, 0.08);
+
+  border: 1px solid rgba(79, 70, 229, 0.2);
+  border-radius: 14px;
+
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.search-result strong {
+  color: var(--color-primary-hover);
+  font-weight: 800;
+}
+
 /* Responsive */
 @media (max-width: 760px) {
   .navbar {
@@ -433,6 +457,16 @@ select {
   .search-help {
     margin-right: 4px;
     margin-left: 4px;
+  }
+
+  .search-result {
+    margin-right: 0;
+    margin-left: 4px;
+  }
+
+  .search-result {
+    margin-right: 0;
+    margin-left: 0;
   }
 }
 

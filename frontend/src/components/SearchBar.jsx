@@ -4,6 +4,8 @@ function SearchBar() {
 
   const [query, setQuery] = useState("")
 
+  const [submttedQuery, setSubmittedQuery] = useState(null)
+
   function HandleQueryChange(event) {
     setQuery(event.target.value)
 
@@ -28,7 +30,7 @@ function SearchBar() {
     ou navegar para outra página ao enviar o form.
   */
 
-    console.log("Submitted:", query)
+    setSubmittedQuery(query)
   }
 
   return (
@@ -73,6 +75,20 @@ function SearchBar() {
       <p className="search-help">
         Escreva do seu jeito. Você pode informar preço, distância, ocasião ou tipo de comida.
       </p>
+
+      <div
+      className="search-status"
+      aria-live="polite"
+      aria-atomic="true"
+      >
+        {}
+        {setSubmittedQuery !== null ? (
+          <p className="search-result">
+            Você pesquisou por: {" "}
+            <strong>{submttedQuery}</strong>
+          </p>
+        ) : null}
+      </div>
     </form>
   )
 }
