@@ -15,6 +15,11 @@
   --color-primary-focus: rgba(79, 70, 229, 0.18);
   --color-primary-outline: rgba(79, 70, 229, 0.4);
 
+  --color-danger: #b42318;
+  --color-danger-border: #e5484d;
+  --color-danger-background: #fff1f0;
+  --color-danger-focus: rgba(229, 72, 77, 0.16);
+
   --shadow-search:
     0 20px 45px rgba(17, 24, 39, 0.1);
 
@@ -266,6 +271,22 @@ select {
   box-shadow: var(--shadow-search-focus);
 }
 
+.search-control--invald {
+  border-color: var(--color-danger-border);
+
+  box-shadow:
+    0 0 0 4px var(--color-danger-focus),
+    0 20px 45px rgba(17, 24, 39, 0.1);
+}
+
+.search-control--invalid:focus-within {
+  border-color: var(--color-danger-border);
+
+  box-shadow: 
+    0 0 0 4px var(--color-danger-focus),
+    0 20px 45px rgba(17, 24, 39, 0.12);
+}
+
 .search-symbol {
   display: inline-flex;
   align-items: center;
@@ -359,6 +380,28 @@ select {
   font-size: 13px;
   line-height: 1.5;
   text-align: center;
+}
+
+.search-error {
+  width: 100%;
+  margin: 0;
+
+  color: var(--color-danger);
+
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.search-error:not(:empty) {
+  margin: 12px 8px 0;
+  padding: 12px 14px;
+
+  background-color: var(--color-danger-background);
+
+  border: 1px solid rgba(180, 35, 24, 0.22);
+  border-radius: 12px;
 }
 
 .search-status {
@@ -465,6 +508,11 @@ select {
   }
 
   .search-result {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .search-error:not(:empty) {
     margin-right: 0;
     margin-left: 0;
   }

@@ -1,13 +1,50 @@
 import { useState } from "react"
 
-function SearchBar() {
+/* Se a pesquisa for composta apenas por espaços */
+const EMPTY_QUERY_ERROR =
+  "Digite o que você está procurando antes de buscar."
 
+function SearchBar() {
   const [query, setQuery] = useState("")
 
-  const [submttedQuery, setSubmittedQuery] = useState(null)
+  const [feedback, setFeedback] = useState({
+    type: "idle",
+  })
 
-  function HandleQueryChange(event) {
-    setQuery(event.target.value)
+  const hasValidationError =
+    feedback.type === "error"
+
+  const hasSuccessfulSearch =
+    feedback.type === "success"
+
+  const inputDescriptionIds = hasValidationError
+    ? "search-help search-error"
+    : "search-help"
+
+  /*
+    Define a classe visual da caixa de pesquisa.
+
+    Quando existe um erro, adicionamos também
+    a classe search-control--invalid.
+  */
+  const searchControlClassName = hasValidationError
+    ? "search-control search-control--invalid"
+    : "search-control"
+
+  function handleQueryChange(event) {
+    const nextQuery = event.target.value
+
+    setQuery(nextQuery)
+
+    if (
+      hasValidationError &&
+      nextQuery.trim().length > 0
+    ) {
+      setFeedback({
+        type: "idle",
+      })
+    }
+  }
 
   /*
     Esta função será executada quando o formulário
@@ -18,35 +55,49 @@ function SearchBar() {
     1. clicando no botão Buscar;
     2. pressionando Enter dentro do input.
   */
-  }
-
   function handleSubmit(event) {
+    /*
+      Impede o comportamento padrão do formulário.
+
+      Sem esta linha, o navegador poderia recarregar
+      ou navegar para outra página ao enviar o form.
+    */
     event.preventDefault()
 
-  /*
-    Impede o comportamento padrão do formulário.
+    const normalizedQuery = query.trim()
 
-    Sem esta linha, o navegador poderia recarregar
-    ou navegar para outra página ao enviar o form.
-  */
+    if (normalizedQuery.length === 0) {
+      setFeedback({
+        type: "error",
+        message: EMPTY_QUERY_ERROR,
+      })
 
-    setSubmittedQuery(query)
+      return
+    }
+
+    setQuery(normalizedQuery)
+
+    setFeedback({
+      type: "success",
+      query: normalizedQuery,
+    })
   }
 
   return (
     <form
       className="search-form"
       role="search"
+      noValidate
       onSubmit={handleSubmit}
     >
-      <label 
+      <label
         className="search-label"
         htmlFor="place-search"
       >
         O que você está procurando?
       </label>
 
-      <div className="search-control">
+      <div className={searchControlClassName}>
         <span
           className="search-symbol"
           aria-hidden="true"
@@ -54,14 +105,21 @@ function SearchBar() {
           ✦
         </span>
 
-        <input 
+        <input
           id="place-search"
           className="search-input"
           name="query"
           type="search"
           placeholder="Ex.: restaurante japonês barato perto de mim"
+          required
           value={query}
-          onChange={HandleQueryChange}
+          aria-invalid={
+            hasValidationError
+              ? "true"
+              : "false"
+          }
+          aria-describedby={inputDescriptionIds}
+          onChange={handleQueryChange}
         />
 
         <button
@@ -72,20 +130,33 @@ function SearchBar() {
         </button>
       </div>
 
-      <p className="search-help">
-        Escreva do seu jeito. Você pode informar preço, distância, ocasião ou tipo de comida.
+      <p
+        id="search-help"
+        className="search-help"
+      >
+        Escreva do seu jeito. Você pode informar preço,
+        distância, ocasião ou tipo de comida.
       </p>
 
       <div
-      className="search-status"
-      aria-live="polite"
-      aria-atomic="true"
+        id="search-error"
+        className="search-error"
+        role="alert"
       >
-        {}
-        {setSubmittedQuery !== null ? (
+        {hasValidationError
+          ? feedback.message
+          : ""}
+      </div>
+
+      <div
+        className="search-status"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        {hasSuccessfulSearch ? (
           <p className="search-result">
-            Você pesquisou por: {" "}
-            <strong>{submttedQuery}</strong>
+            Você pesquisou por:{" "}
+            <strong>{feedback.query}</strong>
           </p>
         ) : null}
       </div>
