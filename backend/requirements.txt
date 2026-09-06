@@ -1,0 +1,2 @@
+﻿# Framework web da API e ferramentas padrão de desenvolvimento
+fastapi[standard-no-fastapi-cloud-cli]==0.141.1
