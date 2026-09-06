@@ -1,0 +1,8 @@
+﻿# Inclui as dependências necessárias para executar a API
+-r requirements.txt
+
+# Cliente HTTP utilizado pelos testes do FastAPI
+httpx==0.28.1
+
+# Executor dos testes automatizados
+pytest==9.1.1
