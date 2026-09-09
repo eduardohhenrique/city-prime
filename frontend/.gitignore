@@ -208,6 +208,10 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
+# Configurações locais do frontend
+frontend/.env.local
+frontend/.env.*.local
+
 # PyCharm
 #   JetBrains specific template is maintained in a separate JetBrains.gitignore that can
 #   be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
